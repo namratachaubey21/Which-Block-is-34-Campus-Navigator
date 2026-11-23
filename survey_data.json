@@ -1,0 +1,243 @@
+{
+  "survey_metadata": {
+    "topic": "Campus Navigation - User Survey",
+    "project_id": "P10: Which Block is 34?",
+    "sample_size": 16,
+    "target_population": "University Students & Visitors (Lovely Professional University)",
+    "institution": "Lovely Professional University (LPU)"
+  },
+  "responses": [
+    {
+      "id": 1,
+      "name": "Harsh Gupta",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Yes",
+      "q2_biggest_problem": "Difficulty finding classrooms",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Yes",
+      "q5_helpful_solution": "Digital campus map",
+      "q6_most_difficult_place": "55-block",
+      "q7_suggestions": "No suggestion , campus is too big fresher always face problem"
+    },
+    {
+      "id": 2,
+      "name": "M. Karthik",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Sometimes",
+      "q2_biggest_problem": "Confusing campus map",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Sometimes",
+      "q5_helpful_solution": "Better direction boards",
+      "q6_most_difficult_place": "Block - 55, 56, 57",
+      "q7_suggestions": "I don't have any suggestion."
+    },
+    {
+      "id": 3,
+      "name": "Aman Kumar Gupta",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Yes",
+      "q2_biggest_problem": "Difficulty finding classrooms",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Yes",
+      "q5_helpful_solution": "Clear block numbers",
+      "q6_most_difficult_place": "Block like 35, 36, 37, 38 all are merge so that was most difficult",
+      "q7_suggestions": "There should be a proper guidance of each Block."
+    },
+    {
+      "id": 4,
+      "name": "Prakhar Maheshwari",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Sometimes",
+      "q2_biggest_problem": "Lack of direction boards",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Sometimes",
+      "q5_helpful_solution": "Better direction boards",
+      "q6_most_difficult_place": "Near block-37",
+      "q7_suggestions": "Digital campus map."
+    },
+    {
+      "id": 5,
+      "name": "Anonymous",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Yes",
+      "q2_biggest_problem": "Difficulty finding classrooms",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Yes",
+      "q5_helpful_solution": "Digital campus map",
+      "q6_most_difficult_place": "Once I face diff in finding 21 block.",
+      "q7_suggestions": "Not much"
+    },
+    {
+      "id": 6,
+      "name": "Aryan",
+      "user_type": "Student",
+      "q1_difficulty_finding": "No",
+      "q2_biggest_problem": "Lack of direction boards",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Sometimes",
+      "q5_helpful_solution": "Better direction boards",
+      "q6_most_difficult_place": "38 number building",
+      "q7_suggestions": "No suggestion"
+    },
+    {
+      "id": 7,
+      "name": "Deshraj Kumar",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Yes",
+      "q2_biggest_problem": "Difficulty finding block numbers / Lack of direction boards",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Yes",
+      "q5_helpful_solution": "Digital campus map & QR code navigation",
+      "q6_most_difficult_place": "In between block 36, 37 and 38 I found difficult to locate classrooms.",
+      "q7_suggestions": "Yes, There should a QR code navigation in which users can scan the QR and locate their respective classrooms."
+    },
+    {
+      "id": 8,
+      "name": "Golu Sharma",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Sometimes",
+      "q2_biggest_problem": "Lack of direction boards",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Sometimes",
+      "q5_helpful_solution": "Better direction boards",
+      "q6_most_difficult_place": "In Block no 29-33",
+      "q7_suggestions": "Just provide ample amount of Sign board which are visible from a distance too."
+    },
+    {
+      "id": 9,
+      "name": "Anmolpreet",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Sometimes",
+      "q2_biggest_problem": "Difficulty finding block numbers",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Sometimes",
+      "q5_helpful_solution": "Clear block numbers",
+      "q6_most_difficult_place": "Hostels and Blocks between 30 to 40",
+      "q7_suggestions": "No"
+    },
+    {
+      "id": 10,
+      "name": "Anonymous",
+      "user_type": "Student",
+      "q1_difficulty_finding": "No",
+      "q2_biggest_problem": "Confusing campus map",
+      "q3_action_when_lost": "Follow direction boards",
+      "q4_ever_been_late": "No",
+      "q5_helpful_solution": "Clear block numbers",
+      "q6_most_difficult_place": "General Campus Area",
+      "q7_suggestions": "Everything is good"
+    },
+    {
+      "id": 11,
+      "name": "Tatipalli Akshan",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Sometimes",
+      "q2_biggest_problem": "Difficulty finding classrooms",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Yes",
+      "q5_helpful_solution": "Mobile navigation system",
+      "q6_most_difficult_place": "Block number - 38",
+      "q7_suggestions": "A digitalize AI voice chatbot that can guide us to our destination"
+    },
+    {
+      "id": 12,
+      "name": "Venkat",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Sometimes",
+      "q2_biggest_problem": "Difficulty finding block numbers",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Sometimes",
+      "q5_helpful_solution": "Better direction boards",
+      "q6_most_difficult_place": "34-block - 5th floor",
+      "q7_suggestions": "NO"
+    },
+    {
+      "id": 13,
+      "name": "Anonymous",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Yes",
+      "q2_biggest_problem": "Confusing campus map",
+      "q3_action_when_lost": "Ask other students / Other: I found difficulty to find LPU",
+      "q4_ever_been_late": "Yes",
+      "q5_helpful_solution": "Digital campus map",
+      "q6_most_difficult_place": "My Room / Hostels",
+      "q7_suggestions": "No Suggestion"
+    },
+    {
+      "id": 14,
+      "name": "Ananthakrishnan",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Sometimes",
+      "q2_biggest_problem": "Confusing campus map & Difficulty finding block numbers",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Yes",
+      "q5_helpful_solution": "Digital campus map & Better direction boards",
+      "q6_most_difficult_place": "Block-37",
+      "q7_suggestions": "place some boards at main points which indicate the blocks and all."
+    },
+    {
+      "id": 15,
+      "name": "Anonymous",
+      "user_type": "Student",
+      "q1_difficulty_finding": "Sometimes",
+      "q2_biggest_problem": "Difficulty finding block numbers",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "Sometimes",
+      "q5_helpful_solution": "Better direction boards",
+      "q6_most_difficult_place": "The place I find most difficult to locate on campus is Block 37.",
+      "q7_suggestions": "Yes there may be some direction boards for the navigation."
+    },
+    {
+      "id": 16,
+      "name": "Anonymous",
+      "user_type": "Student",
+      "q1_difficulty_finding": "No",
+      "q2_biggest_problem": "Difficulty finding classrooms",
+      "q3_action_when_lost": "Ask other students",
+      "q4_ever_been_late": "No",
+      "q5_helpful_solution": "Better direction boards",
+      "q6_most_difficult_place": "law block",
+      "q7_suggestions": "Better direction boards"
+    }
+  ],
+  "statistical_summary": {
+    "q1_difficulty_finding_blocks": {
+      "Yes": 5,
+      "Sometimes": 8,
+      "No": 3,
+      "positive_friction_rate_percent": 81.25
+    },
+    "q2_biggest_pain_points": {
+      "Difficulty finding classrooms": 5,
+      "Lack of direction boards": 4,
+      "Difficulty finding block numbers": 4,
+      "Confusing campus map": 3
+    },
+    "q3_primary_coping_mechanism": {
+      "Ask other students": 14,
+      "Follow direction boards": 2,
+      "Use Google Maps": 0,
+      "Ask security guards": 1
+    },
+    "q4_lateness_due_to_misdirection": {
+      "Yes": 7,
+      "Sometimes": 7,
+      "No": 2,
+      "ever_late_percentage": 87.5
+    },
+    "q5_preferred_solutions": {
+      "Better direction boards": 8,
+      "Digital campus map": 6,
+      "Clear block numbers": 3,
+      "QR code navigation": 2,
+      "Mobile navigation system": 1
+    },
+    "key_trouble_zones": [
+      "Blocks 33-38 (Interconnected merged blocks: 34, 35, 36, 37, 38) - 9 mentions",
+      "Blocks 55-57 - 2 mentions",
+      "Blocks 21, 29-33 - 2 mentions",
+      "Law Block - 1 mention",
+      "Hostels - 2 mentions"
+    ]
+  }
+}

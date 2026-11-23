@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LPU Campus Navigator — P10: Which Block is 34? (Block 34, 36 & 37 Pathways)</title>
+  <meta name="description" content="LPU Smart Campus Navigator & Pathfinder — P10: Which Block is 34? Featuring Block 34, 36, and 37 Pathways">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Project Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              900: '#064e3b',
+            },
+            ums: {
+              orange: '#f97316',
+              darkorange: '#ea580c'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-emerald-500 selection:text-black">
+
+  <!-- Top Announcement Bar & Team Roster -->
+  <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-700 py-1.5 px-4 text-xs font-medium text-white shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded-full bg-black/25 text-emerald-200 font-bold uppercase tracking-wider text-[10px]">
+          CA2 Working Prototype
+        </span>
+        <span>Topic: <strong>P10: Which Block is 34?</strong> — Lovely Professional University (LPU)</span>
+      </div>
+      <div class="flex items-center gap-3 text-emerald-100 text-xs">
+        <span>Team Lead: <strong>Namrata Kumari (Roll 25)</strong></span>
+        <button onclick="toggleModal('teamModal')" class="underline hover:text-white transition">View All 4 Members</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- UMS Personalized Student Portal Bar -->
+  <div class="bg-slate-900 border-b border-slate-800 py-2.5 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2.5">
+        <span id="umsUserStatusBadge" class="px-2 py-0.5 rounded-full ums-badge text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1">
+          <i class="fa-solid fa-graduation-cap"></i> UMS Synchronized
+        </span>
+        <span id="umsUserDetailsText" class="text-slate-300">
+          Loading student session...
+        </span>
+        <span id="backendStatusBadge" class="px-2.5 py-0.5 rounded-full bg-slate-950 border border-slate-700 text-slate-300 text-[10px] font-mono flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Backend: Connecting...
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="toggleModal('umsLoginModal')" id="umsLoginToggleBtn" class="px-3 py-1 rounded-lg bg-orange-600 hover:bg-orange-500 text-white font-semibold transition flex items-center gap-1.5 shadow-sm shadow-orange-600/30">
+          <i class="fa-solid fa-key"></i>
+          <span>UMS Sign In / Switch</span>
+        </button>
+        <button onclick="resetUserSession()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition" title="Reset to default session">
+          <i class="fa-solid fa-arrow-rotate-left"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-400 flex items-center justify-center text-slate-950 shadow-lg shadow-emerald-500/25">
+          <i class="fa-solid fa-compass text-xl"></i>
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            LPU Campus Navigator
+            <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">P10</span>
+          </h1>
+          <p class="text-[11px] text-slate-400">Indoor & Outdoor Smart Pathfinder</p>
+        </div>
+      </div>
+
+      <!-- Header Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button onclick="toggleVoiceGuidance()" id="voiceGuidanceBtn" class="text-xs px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-2 transition">
+          <i class="fa-solid fa-volume-high text-cyan-400"></i>
+          <span class="hidden sm:inline">Voice Guidance</span>
+        </button>
+
+        <button onclick="document.getElementById('mapSection').scrollIntoView({behavior: 'smooth'})" class="text-xs px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-2 transition">
+          <i class="fa-solid fa-map-location-dot text-indigo-400"></i>
+          <span class="hidden sm:inline">Campus Map</span>
+        </button>
+
+        <button onclick="toggleModal('securityModal')" class="text-xs px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium flex items-center gap-2 transition shadow shadow-emerald-600/30">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Security / E-Cart</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section & Fast Search -->
+  <section class="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 pt-8 pb-10 px-4 sm:px-6 lg:px-8 border-b border-slate-800 relative">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs text-slate-300 mb-4">
+        <i class="fa-solid fa-location-crosshairs text-emerald-400"></i>
+        <span>Find the Nearest & Easiest Way Across Lovely Professional University</span>
+      </div>
+
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4 leading-tight">
+        Navigate to <span class="text-emerald-400">Block 34</span>, <span class="text-purple-400">Block 36</span>, and the Hidden <span class="text-amber-400">Block 37</span>
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Engineered for freshers and students facing the maze of <strong>Blocks 33–38</strong>. Sync your UMS timetable, select any campus gate or hostel, and receive turn-by-turn indoor directions with exact elevators and floor levels.
+      </p>
+
+      <!-- Global Search Bar -->
+      <div class="max-w-2xl mx-auto bg-slate-900 p-2 rounded-2xl border border-slate-700 shadow-2xl flex flex-col sm:flex-row gap-2">
+        <div class="flex-1 relative flex items-center">
+          <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-4 text-sm"></i>
+          <input 
+            id="globalSearchInput" 
+            type="text" 
+            placeholder="Search block or room (e.g. 34-501, Block 36, Block 37, Law Block)..." 
+            class="w-full pl-11 pr-4 py-3 bg-transparent text-white placeholder-slate-400 text-xs sm:text-sm focus:outline-none"
+          />
+        </div>
+        <button 
+          onclick="handleSearchQuery(document.getElementById('globalSearchInput').value)"
+          class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-600/30">
+          <i class="fa-solid fa-route"></i>
+          <span>Locate Path</span>
+        </button>
+      </div>
+
+      <!-- The 3 Compulsory Primary Action Cards -->
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-left max-w-5xl mx-auto">
+        <!-- 1. COMPULSORY BLOCK 34 PATHWAY -->
+        <div onclick="triggerBlock34Pathway()" class="cursor-pointer bg-gradient-to-b from-emerald-950/60 to-slate-900 border-2 border-emerald-500/80 rounded-2xl p-4 hover:border-emerald-400 transition shadow-lg shadow-emerald-950/40 relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500 text-slate-950">
+              Compulsory Topic P10
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-emerald-400 group-hover:translate-x-1 transition"></i>
+          </div>
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-building text-emerald-400"></i>
+            Pathway to Block 34
+          </h3>
+          <p class="text-xs text-slate-300 mt-1">
+            "Which Block is 34?" — Direct route to CSE Lecture Halls (34-501 to 34-512) and Lift Bank B.
+          </p>
+          <div class="mt-3 text-[11px] font-bold text-emerald-300 flex items-center gap-1">
+            <span>Show Easiest Route</span>
+            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </div>
+        </div>
+
+        <!-- 2. COMPULSORY BLOCK 36 PATHWAY -->
+        <div onclick="triggerBlock36Pathway()" class="cursor-pointer bg-gradient-to-b from-purple-950/60 to-slate-900 border-2 border-purple-500/80 rounded-2xl p-4 hover:border-purple-400 transition shadow-lg shadow-purple-950/40 relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-purple-500 text-white">
+              Required Pathway
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-purple-400 group-hover:translate-x-1 transition"></i>
+          </div>
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-chalkboard-user text-purple-400"></i>
+            Pathway to Block 36
+          </h3>
+          <p class="text-xs text-slate-300 mt-1">
+            Large Tiered Lecture Theatres & Mathematics wing. Indoor bridge access past Block 35.
+          </p>
+          <div class="mt-3 text-[11px] font-bold text-purple-300 flex items-center gap-1">
+            <span>Show Easiest Route</span>
+            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </div>
+        </div>
+
+        <!-- 3. COMPULSORY BLOCK 37 PATHWAY -->
+        <div onclick="triggerBlock37Pathway()" class="cursor-pointer bg-gradient-to-b from-amber-950/60 to-slate-900 border-2 border-amber-500/80 rounded-2xl p-4 hover:border-amber-400 transition shadow-lg shadow-amber-950/40 relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500 text-slate-950">
+              Hardest To Find
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-amber-400 group-hover:translate-x-1 transition"></i>
+          </div>
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-compass-drafting text-amber-400"></i>
+            Pathway to Block 37
+          </h3>
+          <p class="text-xs text-slate-300 mt-1">
+            The hidden North Wing / Multimedia Studios. Accessible via the Block 35 cafeteria breezeway.
+          </p>
+          <div class="mt-3 text-[11px] font-bold text-amber-300 flex items-center gap-1">
+            <span>Show Easiest Route</span>
+            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Workspace -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-10">
+
+    <!-- QR Scan Alert (Appears on scan simulation) -->
+    <div id="qrScanAlert" class="hidden p-4 rounded-2xl bg-cyan-950/80 border border-cyan-500 shadow-xl"></div>
+
+    <!-- Section 1: UMS Timetable Manager & One-Tap Class Navigator -->
+    <section class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 border-b border-slate-800 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-calendar-days text-orange-500"></i>
+            My UMS Today's Schedule & Quick Pathfinder
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Classes automatically synchronized from your University Management System account.</p>
+        </div>
+        <button onclick="toggleModal('addClassModal')" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-plus text-emerald-400"></i>
+          <span>Add Custom Class</span>
+        </button>
+      </div>
+
+      <!-- Timetable Cards Container -->
+      <div id="timetableContainer" class="space-y-3">
+        <!-- Rendered via app.js -->
+      </div>
+    </section>
+
+    <!-- Section 2: Custom Route Planner & Transport Mode Selector -->
+    <section class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 border-b border-slate-800 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-emerald-400"></i>
+            Campus Route Planner (Dijkstra Shortest & Easiest Path)
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Calculate routes with step-by-step corridor and elevator guidance.</p>
+        </div>
+
+        <!-- Mode Toggle: Walking vs E-Cart Shuttle -->
+        <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-2xl border border-slate-800">
+          <button onclick="setTransportMode('walking')" id="transportModeWalkBtn" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 font-bold text-white shadow text-xs flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-person-walking"></i>
+            <span>Pedestrian Route</span>
+          </button>
+          <button onclick="setTransportMode('ecart')" id="transportModeEcartBtn" class="px-3.5 py-1.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800 text-xs flex items-center gap-1.5 hover:text-white transition">
+            <i class="fa-solid fa-van-shuttle text-cyan-400"></i>
+            <span>Campus E-Cart</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- E-Cart Shuttle Guidance Box (Visible when E-Cart selected) -->
+      <div id="ecartShuttleCard" class="hidden mb-6 p-4 rounded-2xl bg-cyan-950/40 border border-cyan-500/40">
+        <h4 class="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-bus"></i> Campus E-Cart Transit Route
+        </h4>
+        <div id="ecartRouteContent"></div>
+      </div>
+
+      <!-- Dropdown Selectors Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- Start Point -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-location-dot text-emerald-400"></i>
+            Starting Point (Where are you?):
+          </label>
+          <select id="startSelect" class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-emerald-500"></select>
+        </div>
+
+        <!-- Destination Point -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-flag-checkered text-amber-400"></i>
+            Destination (Where do you want to go?):
+          </label>
+          <select id="endSelect" class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-emerald-500"></select>
+        </div>
+
+        <!-- Route Mode & Submit -->
+        <div class="flex flex-col justify-end">
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-universal-access text-cyan-400"></i>
+            Route Preference:
+          </label>
+          <div class="flex gap-2">
+            <select id="prefSelect" class="flex-1 bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-cyan-500">
+              <option value="normal">Shortest Walking Path</option>
+              <option value="covered">Weatherproof Covered Path</option>
+              <option value="accessible">Elevator & Ramp Only (No Stairs)</option>
+            </select>
+            <button 
+              onclick="handleCalculateRoute()" 
+              class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition shrink-0 shadow-lg shadow-emerald-600/30">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Navigate</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Interactive SVG Campus Map -->
+    <section id="mapSection" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl relative overflow-hidden">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-map text-emerald-400"></i>
+            Lovely Professional University (LPU) — Interactive Campus Map
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Click any node to select destination or examine routes. Animated green/gold path shows active route.</p>
+        </div>
+
+        <!-- Map Legend -->
+        <div class="flex flex-wrap items-center gap-3 text-[11px] text-slate-300 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>Block 34 (CSE)</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-500 inline-block"></span>Block 36 (Lecture)</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>Block 37 (Hidden)</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-cyan-500 inline-block"></span>Hubs</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>Gates</span>
+        </div>
+      </div>
+
+      <!-- SVG Map Canvas (1000x700 responsive) -->
+      <div class="w-full bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-inner flex items-center justify-center p-2">
+        <svg id="campusSvgMap" viewBox="0 0 1000 700" class="w-full h-auto max-h-[550px]"></svg>
+      </div>
+    </section>
+
+    <!-- Section 4: Simulated Step-by-Step GPS Walkthrough Card -->
+    <section id="gpsWalkthroughCard" class="hidden bg-slate-900 border-2 border-cyan-500/60 rounded-3xl p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-cyan-400 animate-ping"></span>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider">Live Simulated GPS Walkthrough</h4>
+        </div>
+        <span id="gpsStepCounter" class="text-xs font-mono px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Step 1 of 5</span>
+      </div>
+
+      <!-- Active Step Direction Display -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-950 p-4 rounded-2xl border border-slate-800">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center shrink-0">
+            <i id="gpsDirectionIcon" class="fa-solid fa-arrow-up text-2xl text-cyan-400"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h5 id="gpsTargetTitle" class="text-sm font-bold text-white">Block 33 Ground Entrance</h5>
+              <span id="gpsDistanceBadge" class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">35 meters</span>
+            </div>
+            <p id="gpsInstructionText" class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Enter through glass doors into Block 33 high-ceiling atrium.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 self-end sm:self-center">
+          <button onclick="prevWalkthroughStep()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-chevron-left"></i>
+            <span>Prev Step</span>
+          </button>
+          <button onclick="nextWalkthroughStep()" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 transition shadow-md shadow-cyan-600/30">
+            <span>Next Step</span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="w-full h-2 rounded-full bg-slate-950 overflow-hidden">
+        <div id="gpsProgressBar" class="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 transition-all duration-300" style="width: 20%"></div>
+      </div>
+    </section>
+
+    <!-- Section 5: Turn-by-Turn Route Direction Card & Printable Timeline -->
+    <section id="routeResultCard" class="bg-slate-900 border-2 border-emerald-500/60 rounded-3xl p-6 shadow-2xl space-y-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="routeTag" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-wide">
+              Easiest Route
+            </span>
+            <h4 id="routeTitle" class="text-xl font-bold text-white">Block 34 (Floor 5)</h4>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Live calculated turn-by-turn guidance with indoor elevator instructions.</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="startWalkthrough()" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold flex items-center gap-2 transition shadow shadow-cyan-600/30">
+            <i class="fa-solid fa-person-walking-arrow-right"></i>
+            <span>Start Simulated Walk</span>
+          </button>
+          <button onclick="toggleVoiceGuidance()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 text-xs font-semibold flex items-center gap-2 transition">
+            <i class="fa-solid fa-volume-high"></i>
+            <span>Speak</span>
+          </button>
+          <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold flex items-center gap-2 transition">
+            <i class="fa-solid fa-print"></i>
+            <span>Print</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pro-Tip Box (For Block 34, 36, 37) -->
+      <div id="routeSpecialTip" class="p-4 rounded-2xl bg-amber-950/40 border border-amber-500/40 text-amber-200 text-xs leading-relaxed flex items-start"></div>
+
+      <!-- Distance & Step Metrics -->
+      <div id="routeMetrics" class="flex flex-wrap items-center gap-3"></div>
+
+      <!-- Turn-by-Turn Steps List -->
+      <div>
+        <h5 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Turn-by-Turn Walking Directions:</h5>
+        <div id="routeStepsList" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- Section 6: Architectural Guide: Why are Blocks 33–38 Merged? -->
+    <section class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
+      <div class="max-w-3xl mb-6">
+        <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-sitemap text-indigo-400"></i>
+          Architectural Guide: Why are Blocks 33–38 Merged?
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1 leading-relaxed">
+          At Lovely Professional University, blocks 33 through 38 are built as an interconnected continuous mega-structure so students can travel between classes without stepping into extreme weather. However, for new students, this creates extreme confusion:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm mb-3">
+            34
+          </div>
+          <h4 class="font-bold text-white text-sm mb-1">Which Block is 34?</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Block 34 is the <strong>second wing</strong> in the spine. It connects directly to Block 33 on the West and Block 35 on the East. It houses the School of Computer Science & Engineering. To reach classrooms 34-501 to 34-512, enter via Block 33 atrium and take Lift Bank B straight to the 5th floor.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800">
+          <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm mb-3">
+            36
+          </div>
+          <h4 class="font-bold text-white text-sm mb-1">How to Navigate Block 36?</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Block 36 contains the university's largest tiered lecture halls. It is located past Block 35. You do not need to walk outside; stay on Floor 1, 2, or 3 of the central indoor spine and walk East across the continuous glass bridge.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm mb-3">
+            37
+          </div>
+          <h4 class="font-bold text-white text-sm mb-1">Why is Block 37 so Hard to Find?</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Unlike other blocks that line the main southern boulevard, Block 37 sits <strong>perpendicularly on the North side</strong> behind Blocks 35 and 36! If walking outside along the main road, it is completely hidden. You must enter Block 35 and turn down the North breezeway beside the cafeteria to enter Block 37.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: QR Code Corridor Placard Simulator -->
+    <section class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-qrcode text-cyan-400"></i>
+            Physical QR Code Corridor Waypoint Simulator
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Test scanning physical placards mounted at corridor junctions across LPU campus.</p>
+        </div>
+        <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
+          Zero App Install Required
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+        <button onclick="simulateQRScan('gate1')" class="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-cyan-500 transition text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-white">Placard #QR-G1</span>
+            <i class="fa-solid fa-camera text-slate-500"></i>
+          </div>
+          <p class="text-slate-400 text-[11px]">LPU Main Gate 1 Terminus</p>
+        </button>
+
+        <button onclick="simulateQRScan('b33_entrance')" class="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-cyan-500 transition text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-white">Placard #QR-33A</span>
+            <i class="fa-solid fa-camera text-slate-500"></i>
+          </div>
+          <p class="text-slate-400 text-[11px]">Block 33 Main Entrance Foyer</p>
+        </button>
+
+        <button onclick="simulateQRScan('b35_ground')" class="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-cyan-500 transition text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-white">Placard #QR-35J</span>
+            <i class="fa-solid fa-camera text-slate-500"></i>
+          </div>
+          <p class="text-slate-400 text-[11px]">Block 35 / Block 37 North Junction</p>
+        </button>
+
+        <button onclick="simulateQRScan('unimall')" class="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-cyan-500 transition text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-white">Placard #QR-MALL</span>
+            <i class="fa-solid fa-camera text-slate-500"></i>
+          </div>
+          <p class="text-slate-400 text-[11px]">Uni Mall Food Court Promenade</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- Section 8: Field Survey Proof (N=16) -->
+    <section id="surveySection" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6 border-b border-slate-800 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-emerald-400"></i>
+            Design Thinking CA2 Survey Data (16 Completed Questionnaires)
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Empirical justification collected directly from students across LPU campus.</p>
+        </div>
+        <a href="survey_data.json" download class="text-xs px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-download"></i>
+          <span>Download survey_data.json</span>
+        </a>
+      </div>
+
+      <!-- Stat Badges -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 text-center">
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <p class="text-2xl font-black text-rose-400">81.3%</p>
+          <p class="text-[11px] text-slate-400 mt-1">Difficulty Finding Blocks (Q1)</p>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <p class="text-2xl font-black text-amber-400">87.5%</p>
+          <p class="text-[11px] text-slate-400 mt-1">Arrived Late to Class (Q4)</p>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <p class="text-2xl font-black text-cyan-400">87.5%</p>
+          <p class="text-[11px] text-slate-400 mt-1">Forced to Ask Strangers (Q3)</p>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <p class="text-2xl font-black text-emerald-400">9 / 16</p>
+          <p class="text-[11px] text-slate-400 mt-1">Cited Blocks 34, 36, 37 as Hardest (Q6)</p>
+        </div>
+      </div>
+
+      <!-- Verbatim Student Quotes -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col justify-between">
+          <p class="text-slate-300 italic">"Block like 35, 36, 37, 38 all are merge so that was most difficult... There should be a proper guidance of each Block."</p>
+          <p class="text-emerald-400 font-bold mt-3 text-[11px]">Aman Kumar Gupta (Survey #3)</p>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col justify-between">
+          <p class="text-slate-300 italic">"34-block - 5th floor... difficulty finding block numbers."</p>
+          <p class="text-indigo-400 font-bold mt-3 text-[11px]">Venkat (Survey #12)</p>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col justify-between">
+          <p class="text-slate-300 italic">"The place I find most difficult to locate on campus is Block 37. Yes there may be some direction boards for the navigation."</p>
+          <p class="text-amber-400 font-bold mt-3 text-[11px]">Survey Respondent #15</p>
+        </div>
+      </div>
+
+      <!-- Live Interactive Survey Dataset Explorer Table -->
+      <div class="mt-8 border-t border-slate-800 pt-6">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <h4 class="text-base font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-table-list text-emerald-400"></i>
+                Verified 16-Student Field Survey Dataset (Interactive Explorer)
+              </h4>
+              <span id="surveyDataSourceBadge" class="text-[10px] px-2.5 py-0.5 rounded-full bg-slate-950 border border-slate-700 text-emerald-400 font-mono">
+                Connecting...
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Original handwritten questionnaire forms transcribed from primary on-campus research at Lovely Professional University.
+            </p>
+          </div>
+          <span id="surveyVisibleCount" class="text-xs text-slate-400 font-mono bg-slate-950 px-3 py-1 rounded-xl border border-slate-800">
+            Showing 16 of 16 Records
+          </span>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4">
+          <div class="flex-1 relative flex items-center">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3.5 text-xs"></i>
+            <input 
+              id="surveySearchInput" 
+              type="text" 
+              oninput="searchSurveyData()" 
+              placeholder="Search responses by name (e.g. Venkat, Aman, Deshraj), block number, or keyword..." 
+              class="w-full pl-9 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            />
+          </div>
+
+          <!-- Quick Filter Buttons -->
+          <div class="flex flex-wrap items-center gap-1.5 text-xs">
+            <button id="filterBtn_all" onclick="filterSurveyData('all')" class="survey-filter-btn px-3 py-1.5 rounded-xl bg-emerald-600 font-bold text-white shadow text-xs transition">
+              All (16)
+            </button>
+            <button id="filterBtn_target_blocks" onclick="filterSurveyData('target_blocks')" class="survey-filter-btn px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 hover:text-white text-xs transition">
+              <i class="fa-solid fa-star text-amber-400 mr-1 text-[10px]"></i>Blocks 34, 36, 37 (9)
+            </button>
+            <button id="filterBtn_late" onclick="filterSurveyData('late')" class="survey-filter-btn px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 hover:text-white text-xs transition">
+              Arrived Late (14)
+            </button>
+            <button id="filterBtn_high_difficulty" onclick="filterSurveyData('high_difficulty')" class="survey-filter-btn px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 hover:text-white text-xs transition">
+              Difficulty: Yes (5)
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrollable Table Container -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-800 bg-slate-900/80 text-[11px] text-slate-400 uppercase tracking-wider font-mono">
+                <th class="py-3 px-3">#</th>
+                <th class="py-3 px-3">Student Name</th>
+                <th class="py-3 px-3">Q1: Difficulty</th>
+                <th class="py-3 px-3">Q2: Primary Problem</th>
+                <th class="py-3 px-3">Q4: Late?</th>
+                <th class="py-3 px-3">Q6: Hardest Location</th>
+                <th class="py-3 px-3">Q7: Verbatim Suggestion</th>
+              </tr>
+            </thead>
+            <tbody id="surveyTableBody">
+              <!-- Populated dynamically via app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal 1: UMS Authentication Modal -->
+  <div id="umsLoginModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="toggleModal('umsLoginModal')" class="absolute top-5 right-5 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-user-lock"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white">LPU UMS Portal Sign In</h3>
+          <p class="text-xs text-slate-400">Sync personalized timetable & classes</p>
+        </div>
+      </div>
+
+      <!-- Quick Demo Account Chips -->
+      <div class="mb-4">
+        <p class="text-[11px] text-slate-400 font-semibold mb-2">Quick Sign-in as CA2 Project Team Members:</p>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <button onclick="quickSelectDemoUser('12500025')" class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-orange-500 text-left transition">
+            <p class="font-bold text-white">Namrata Kumari</p>
+            <p class="text-[10px] text-slate-400">Roll: 25 (Team Lead)</p>
+          </button>
+          <button onclick="quickSelectDemoUser('12526252')" class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-orange-500 text-left transition">
+            <p class="font-bold text-white">Shahzadi.c</p>
+            <p class="text-[10px] text-slate-400">Roll: 28 | Reg: 12526252</p>
+          </button>
+          <button onclick="quickSelectDemoUser('12504556')" class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-orange-500 text-left transition">
+            <p class="font-bold text-white">Abhay Jaiswal</p>
+            <p class="text-[10px] text-slate-400">Roll: 24 | Reg: 12504556</p>
+          </button>
+          <button onclick="quickSelectDemoUser('11218773')" class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-orange-500 text-left transition">
+            <p class="font-bold text-white">Arman</p>
+            <p class="text-[10px] text-slate-400">Roll: 19 | Reg: 11218773</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Standard Form -->
+      <form onsubmit="handleUmsLogin(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Registration Number:</label>
+          <input id="umsRegInput" type="text" placeholder="e.g. 12526252" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-orange-500 font-mono" />
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">UMS Password:</label>
+          <input id="umsPassInput" type="password" placeholder="••••••••" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-orange-500" />
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs transition shadow-md shadow-orange-600/30">
+          Authenticate & Sync Timetable
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Add Custom Class Modal -->
+  <div id="addClassModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="toggleModal('addClassModal')" class="absolute top-5 right-5 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-calendar-plus"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white">Add Custom Class</h3>
+          <p class="text-xs text-slate-400">Customize your personalized timetable</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleAddCustomClass(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Time Slot:</label>
+          <input id="customClassTime" type="text" placeholder="e.g. 04:00 PM" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500" required />
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Course Title:</label>
+          <input id="customCourseName" type="text" placeholder="e.g. CSE408: Artificial Intelligence" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500" required />
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Target Academic Block:</label>
+          <select id="customClassBlock" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500">
+            <option value="b34_floor5">Block 34 (CSE Labs, 5th Floor) [Topic Target]</option>
+            <option value="b36_ground">Block 36 (Tiered Lecture Theatres)</option>
+            <option value="b37_entrance">Block 37 (Hidden North Wing / Multimedia)</option>
+            <option value="law_block">School of Law (Law Block)</option>
+            <option value="b55_cluster">Block 55–57 Academic Cluster</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Room / Lab Code:</label>
+          <input id="customClassRoom" type="text" placeholder="e.g. 34-508 or 37-302" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500" required />
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Instructor / Faculty Name:</label>
+          <input id="customClassFaculty" type="text" placeholder="e.g. Dr. Verma" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500" />
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition shadow-md shadow-emerald-600/30">
+          Save Class & Auto-Route
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 3: Security & Campus Transport Helpdesk -->
+  <div id="securityModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="toggleModal('securityModal')" class="absolute top-5 right-5 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white">Campus Safety & Shuttle Directory</h3>
+          <p class="text-xs text-slate-400">Lovely Professional University Support</p>
+        </div>
+      </div>
+
+      <div class="space-y-3 text-xs mb-4">
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-white">Main Security Control Room</p>
+            <p class="text-slate-400">Gate 1 Central Booth</p>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-slate-800 font-mono text-emerald-400 font-bold">Ext. 2021</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-white">Block 34 Student Helpdesk</p>
+            <p class="text-slate-400">Ground Foyer Reception</p>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-slate-800 font-mono text-emerald-400 font-bold">Ext. 3401</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-white">Uni-Hospital Emergency Care</p>
+            <p class="text-slate-400">24/7 Ambulance & Medical Hub</p>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-slate-800 font-mono text-rose-400 font-bold">Ext. 108</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-white">Campus E-Cart Terminal</p>
+            <p class="text-slate-400">Gate 1 to Block 34 (Every 3 mins)</p>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 font-bold">Free Shuttle</span>
+        </div>
+      </div>
+
+      <button onclick="toggleModal('securityModal')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold">
+        Close Window
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal 4: CA2 Team Details Modal -->
+  <div id="teamModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="toggleModal('teamModal')" class="absolute top-5 right-5 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white">CA2 Project Team Details</h3>
+          <p class="text-xs text-slate-400">Design Thinking Assessment</p>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 text-xs mb-6">
+        <div class="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30">
+          <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-wide">Group Leader</span>
+          <p class="font-bold text-white text-sm">Namrata Kumari</p>
+          <p class="text-slate-400">Roll No: <strong>25</strong> | Email: namratakumari2211@gmail.com</p>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <p class="font-bold text-white">Shahzadi.c</p>
+          <p class="text-slate-400">Roll No: <strong>28</strong> | Reg No: <strong>12526252</strong></p>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <p class="font-bold text-white">Abhay Jaiswal</p>
+          <p class="text-slate-400">Roll No: <strong>24</strong> | Reg No: <strong>12504556</strong></p>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <p class="font-bold text-white">Arman</p>
+          <p class="text-slate-400">Roll No: <strong>19</strong> | Reg No: <strong>11218773</strong></p>
+        </div>
+      </div>
+
+      <a href="https://drive.google.com/drive/folders/1kaoEALkLw2l0SB1W9PndeJpRoxTz10Ll?usp=drive_link" target="_blank" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition">
+        <i class="fa-brands fa-google-drive"></i>
+        <span>Open Project Google Drive Folder</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-slate-900 py-6 px-4 text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>
+        <strong>CA2 Design Thinking Prototype</strong> — Lovely Professional University (LPU)
+      </p>
+      <div class="flex items-center gap-3">
+        <a href="DESIGN_THINKING_PROJECT_REPORT.md" class="hover:text-emerald-400 transition">Design Thinking Report</a>
+        <span>•</span>
+        <a href="CA2_PRESENTATION_SLIDES.md" class="hover:text-emerald-400 transition">Viva Presentation Slides</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Toggle Helper -->
+  <script>
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.toggle('hidden');
+    }
+  </script>
+
+  <!-- Core Application Logic -->
+  <script src="app.js"></script>
+  <!-- Service Worker Registration for PWA Offline Navigation -->
+  <script>
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+          console.log('[PWA] Service Worker registered successfully', reg.scope);
+        }).catch(err => {
+          console.log('[PWA] Service Worker registration failed', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

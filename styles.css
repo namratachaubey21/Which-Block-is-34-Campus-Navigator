@@ -1,0 +1,120 @@
+/* LPU Smart Campus Navigator & Pathfinder Styling */
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.95));
+  }
+}
+
+@keyframes pulseGlowAmber {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.95));
+  }
+}
+
+@keyframes pulseGlowPurple {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.95));
+  }
+}
+
+@keyframes pulseStepNode {
+  0% {
+    r: 10;
+    opacity: 1;
+  }
+  50% {
+    r: 22;
+    opacity: 0.4;
+  }
+  100% {
+    r: 10;
+    opacity: 1;
+  }
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.route-active-line {
+  stroke-dasharray: 8 6;
+  animation: dashFlow 1.2s linear infinite;
+}
+
+.block-highlight-34 {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+.block-highlight-36 {
+  animation: pulseGlowPurple 2.5s infinite ease-in-out;
+}
+
+.block-highlight-37 {
+  animation: pulseGlowAmber 2.5s infinite ease-in-out;
+}
+
+.active-step-beacon {
+  animation: pulseStepNode 1.5s infinite ease-in-out;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+/* Map Node Hover */
+.map-node {
+  transition: transform 0.2s ease, fill 0.2s ease;
+  cursor: pointer;
+}
+.map-node:hover {
+  transform: scale(1.15);
+}
+
+/* UMS Portal Aesthetic Accents */
+.ums-badge {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  color: white;
+}
+
+/* Print Styling */
+@media print {
+  header, footer, #qrSection, #aiSection, #transportSection, .no-print, button, select, input {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  #routeResultCard {
+    border: 1px solid #000 !important;
+    background: white !important;
+    color: black !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
